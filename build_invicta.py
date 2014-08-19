@@ -70,7 +70,7 @@ for inv_temp in InvictaTemplates.keys():
             lun_to_create,
             lun_vg,
             lun_size,
-            "rtpcpocvg01",
+            "testvg01",
             "true")
 
         for lun_init_group in lun_init_groups.keys():
