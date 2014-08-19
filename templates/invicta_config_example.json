@@ -1,0 +1,52 @@
+{
+    "invicta_template": {
+        "initiator_groups": {
+            "ESXc1_1_ig": {
+                "A": "20:00:00:25:B5:0A:11:01",
+                "B": "20:00:00:25:B5:0B:11:02"
+            },
+            "ESXc1_2_ig": {
+                "A": "20:00:00:25:B5:0A:12:01",
+                "B": "20:00:00:25:B5:0B:12:02"
+            },
+            "ESXc1_3_ig": {
+                "A": "20:00:00:25:B5:0A:13:01",
+                "B": "20:00:00:25:B5:0B:13:02"
+            },
+            "ESXc1_4_ig": {
+                "A": "20:00:00:25:B5:0A:14:01",
+                "B": "20:00:00:25:B5:0B:14:02"
+            }
+        },
+        "luns": {
+            "ESXc1_1_lun0": {
+                "initiator_groups": {
+                    "ESXc1_1_ig": "0"
+                },
+                "size": "5",
+                "volume_group": "SSN"
+            },
+            "ESXc1_2_lun0": {
+                "initiator_groups": {
+                    "ESXc1_2_ig": "0"
+                },
+                "size": "5",
+                "volume_group": "SSN"
+            },
+            "ESXc1_3_lun0": {
+                "initiator_groups": {
+                    "ESXc1_3_ig": "0"
+                },
+                "size": "5",
+                "volume_group": "SSN"
+            },
+            "ESXc1_4_lun0": {
+                "initiator_groups": {
+                    "ESXc1_4_ig": "0"
+                },
+                "size": "5",
+                "volume_group": "SSN"
+            }
+        }
+    }
+}

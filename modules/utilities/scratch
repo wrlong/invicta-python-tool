@@ -1,0 +1,747 @@
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r = requests.post(api_url, data, verify=False)
+>>> r.text
+u'{"status":501,"message":"Incorrectly specified content type. Following content type(s) are supported: \\"application\\/json\\", \\"application\\/octet-stream\\"","data":null,"envelope_version":"15"}'
+>>> headers = {'Content-type': 'application/json'}>>> r = requests.post(api_url, data, verify=False)
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.text
+u'{"status":501,"message":"Incorrectly specified content type. Following content type(s) are supported: \\"application\\/json\\", \\"application\\/octet-stream\\"","data":null,"envelope_version":"15"}'
+>>> headers = {'Content-type': 'application/json', 'Accept': 'application/json'} 
+>>> r = requests.post(api_url, data, verify=False, headers=headers)>>> r.text                                                                      u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> data'{"username": "apiuser", "password": "c1sco123"}'
+>>> data
+'{"username": "apiuser", "password": "c1sco123"}'
+>>> 
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)             >>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.request.headersCaseInsensitiveDict({'Content-Length': '47', 'Content-type': 'application/json', 'Accept-Encoding': 'gzip, deflate, compress', 'Accept': 'application/json', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r
+<Response [200]>
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.data
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'data'
+>>> r = requests.post(api_url, data, verify=False, headers=headers, auth=('apiuser','c1sco123'))
+>>> r.text                                                                      u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r = requests.post(api_url, verify=False, headers=headers, auth=('apiuser','c1sco123'))
+>>> r.text                                                                      u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.json
+<bound method Response.json of <Response [200]>>
+>>> print r.json
+<bound method Response.json of <Response [200]>>
+>>> r.json
+<bound method Response.json of <Response [200]>>
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> data
+'{"username": "apiuser", "password": "c1sco123"}'
+>>> data = json.dumps({'username':'apiuser','password':'c1sco123'})>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.status_code
+200
+>>> r.history
+[]
+>>> r
+<Response [200]>
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.test.json
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'test'
+>>> r.text.json
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'unicode' object has no attribute 'json'
+>>> r.text.status
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'unicode' object has no attribute 'status'
+>>> r.message
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'message'
+>>> print r.json
+<bound method Response.json of <Response [200]>>
+>>> headers
+{'Content-type': 'application/json', 'Accept': 'application/json'}
+>>> headers = u'{"Content-type":"application/json","Accept":"application/json"}' 
+>>> r = requests.post(api_url, data, verify=False, headers=headers)Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 349, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 287, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 288, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 387, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'unicode' object has no attribute 'items'
+>>> data = json.dumps({'username':'apiuser','password':'c1sco123'})>>> headers = json.dumps({'Content-type':'application/json','Accept':'application/json'})
+>>> r = requests.post(api_url, data, verify=False, headers=headers)             Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 349, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 287, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 288, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 387, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> api_url
+'https://172.26.10.100/restapi/15/authenticate'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 349, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 287, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 288, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 387, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> headers = "{'Content-type':'application/json','Accept':'application/json'})" 
+>>> r = requests.post(api_url, data, verify=False, headers=headers)             Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 349, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 287, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 288, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 387, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> headers = {'Content-type':'application/json','Accept':'application/json'}>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.data
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'data'
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> headers = "{'Content-type':'application/json','Accept':'application/json'}"
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 349, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 287, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 288, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 387, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '47', 'Content-type': 'application/json', 'Accept-Encoding': 'gzip, deflate, compress', 'Accept': 'application/json', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 10:30:19 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> headers = "{'content-type':'application/json','accept':'application/json'}"
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 349, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 287, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 288, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 387, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> headers = {'content-type':'application/json','accept':'application/json'}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 10:35:27 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '47', 'content-type': 'application/json', 'Accept-Encoding': 'gzip, deflate, compress', 'accept': 'application/json', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> headers = {'accept':'application/json'}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '47', 'Accept-Encoding': 'gzip, deflate, compress', 'accept': 'application/json', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> r.json()
+{u'status': 100, u'envelope_version': u'15', u'message': u'Invalid data format.', u'data': None}
+>>> r.raw
+<requests.packages.urllib3.response.HTTPResponse object at 0x10f558410>
+>>> r.status_code
+200
+>>> r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 10:36:02 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> r.headers.get('content-type')
+'text/html; charset=UTF-8'
+>>> headers = {'content-type':'application/json','accept':'application/json'}
+>>> r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 10:36:02 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 10:39:05 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '47', 'content-type': 'application/json', 'Accept-Encoding': 'gzip, deflate, compress', 'accept': 'application/json', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> r.json()
+{u'status': 100, u'envelope_version': u'15', u'message': u'Invalid data format.', u'data': None}
+>>> r.headers.get('content-type')
+'text/html; charset=UTF-8'
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '47', 'content-type': 'application/json', 'Accept-Encoding': 'gzip, deflate, compress', 'accept': 'application/json', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> headers = {'content-type':'application/json; text/html','accept':'application/json'}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)>>> r.json(){u'status': 100, u'envelope_version': u'15', u'message': u'Invalid data format.', u'data': None}
+>>> r.text
+u'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.encoding
+'UTF-8'
+>>> r.headers.encoding
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'CaseInsensitiveDict' object has no attribute 'encoding'
+>>> r.content
+'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> data = {'username':'apiuser','password':'c1sco123'}>>> r = requests.post(api_url, data, verify=False, headers=headers)             >>> r.content
+'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> headers = {'content-type':'text/html','accept':'application/json'} >>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.content
+'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> headers = {'accept':'application/json'}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.content
+'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> data = '{"username":"apiuser","password":"c1sco123"}'
+>>> headers = '{"Content-Type":"application/json","Accept":"application/json"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 349, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests/sessions.py", line 287, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 288, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests/models.py", line 387, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> r = requests.post(api_url, data, verify=False)
+>>> r.contect
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'contect'
+>>> r.content
+'{"status":501,"message":"Incorrectly specified content type. Following content type(s) are supported: \\"application\\/json\\", \\"application\\/octet-stream\\"","data":null,"envelope_version":"15"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+KeyboardInterrupt
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '44', 'Accept-Encoding': 'gzip, deflate, compress', 'Accept': '*/*', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> headers = {"Content-Type":"application/json","Accept":"application/json"}>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '44', 'Content-Type': 'application/json', 'Accept-Encoding': 'gzip, deflate, compress', 'Accept': 'application/json', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0'})
+>>> r.content
+'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> print r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 11:18:14 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> print r.headers['content-type']
+text/html; charset=UTF-8
+>>> headers = {"Content-Type":"application/json","Accept":"application/json; text/html"}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)>>> headers = {"Content-Type":"application/json","Accept":"application/json; text/html"}
+>>> r = requests.post(api_url, data=json.dumps(data), verify=False, headers=headers)
+>>> print r.headersCaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 11:22:05 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> r.content'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> 
+>>> r = requests.post(api_url, verify=False, headers=headers, auth=('apiuser','c1sco123'))
+>>> r.content                                                                   '{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> api_url'https://172.26.10.100/restapi/15/authenticate'
+>>> from requests.auth import HTTPBasicAuth
+>>> r = requests.post(api_url, verify=False, headers=headers, auth=('apiuser','c1sco123'))
+>>> r.content'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.request
+<PreparedRequest [POST]>
+>>> r.request.raw
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'PreparedRequest' object has no attribute 'raw'
+>>> r.request.data
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'PreparedRequest' object has no attribute 'data'
+>>> r.request.content
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'PreparedRequest' object has no attribute 'content'
+>>> r.request
+<PreparedRequest [POST]>
+>>> r.request()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'PreparedRequest' object is not callable
+>>> r.request.headers
+CaseInsensitiveDict({'Content-Length': '0', 'Accept-Encoding': 'gzip, deflate, compress', 'Accept': 'application/json; text/html', 'User-Agent': 'python-requests/2.2.1 CPython/2.7.5 Darwin/13.2.0', 'Content-Type': 'application/json', 'Authorization': u'Basic YXBpdXNlcjpjMXNjbzEyMw=='})
+>>> r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 11:27:11 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> r.response.headers
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'response'
+>>> r.response
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'response'
+>>> r.content
+'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> data
+'{"username":"apiuser","password":"c1sco123"}'
+>>> data.json
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'str' object has no attribute 'json'
+>>> json.dumps(data)
+'"{\\"username\\":\\"apiuser\\",\\"password\\":\\"c1sco123\\"}"'
+>>> data.json
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'str' object has no attribute 'json'
+>>> data
+'{"username":"apiuser","password":"c1sco123"}'
+>>> data
+'{"username":"apiuser","password":"c1sco123"}'
+>>> data = {'username':'apiuser','password':'c1sco123'}>>> json.dumps(data)
+'{"username": "apiuser", "password": "c1sco123"}'
+>>> headers = {"Content-Type":"application/json","Accept":"application/json"}>>> r = requests.post(api_url, data=json.dumps(data), verify=False, headers=headers)
+>>> r.content
+'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> r.raw
+<requests.packages.urllib3.response.HTTPResponse object at 0x10f54b490>
+>>> r.headers
+CaseInsensitiveDict({'content-length': '83', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 11:36:43 GMT', 'content-type': 'text/html; charset=UTF-8'})
+>>> headers = {"Accept":"application/json"}   >>> r = requests.post(api_url, data=json.dumps(data), verify=False, headers=headers)
+>>> r.content'{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> json
+<module 'json' from '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.pyc'>
+>>> headers = {"Content-Type":"application/x-www-form-urlencoded","Accept":"application/json"}
+>>> r = requests.post(api_url, data=json.dumps(data), verify=False, headers=headers)
+>>> r.content                                                                   '{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}'
+>>> headers = {"Content-Type":"application/json","Accept":"application/json"}>>> r = requests.post(api_url, data=json.dumps(data), verify=False, headers=headers)
+>>> r.contentKeyboardInterrupt
+>>> import pycurl
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named pycurl
+>>> quit()
+rtp-wrlong-89110:invicta-python-tool wrlong$ sudo pip install pycurl
+Password:
+Downloading/unpacking pycurl
+  Downloading pycurl-7.19.3.1.tar.gz (116kB): 116kB downloaded
+  Running setup.py (path:/private/tmp/pip_build_root/pycurl/setup.py) egg_info for package pycurl
+    Using curl-config (libcurl 7.30.0)
+    
+Installing collected packages: pycurl
+  Running setup.py install for pycurl
+    Using curl-config (libcurl 7.30.0)
+    building 'pycurl' extension
+    cc -fno-strict-aliasing -fno-common -dynamic -arch x86_64 -arch i386 -g -Os -pipe -fno-common -fno-strict-aliasing -fwrapv -DENABLE_DTRACE -DMACOSX -DNDEBUG -Wall -Wstrict-prototypes -Wshorten-64-to-32 -DNDEBUG -g -fwrapv -Os -Wall -Wstrict-prototypes -DENABLE_DTRACE -arch x86_64 -arch i386 -pipe -DPYCURL_VERSION="7.19.3.1" -DHAVE_CURL_SSL=1 -I/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7 -c src/pycurl.c -o build/temp.macosx-10.9-intel-2.7/src/pycurl.o
+    src/pycurl.c:123:4: warning: "libcurl was compiled with SSL support, but configure could not determine which "    "library was used; thus no SSL crypto locking callbacks will be set, which may "    "cause random crashes on SSL requests" [-W#warnings]
+    #  warning \
+       ^
+    src/pycurl.c:1555:26: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
+                int sockfd = PyInt_AsLong(fileno_result);
+                    ~~~~~~   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+    src/pycurl.c:1630:24: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
+            int ret_code = PyInt_AsLong(result);
+                ~~~~~~~~   ^~~~~~~~~~~~~~~~~~~~
+    src/pycurl.c:2447:31: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
+                            val = PyLong_AsLong(PyTuple_GET_ITEM(t, j));
+                                ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    src/pycurl.c:3610:22: warning: implicit conversion loses integer precision: 'long' to '__darwin_suseconds_t' (aka 'int') [-Wshorten-64-to-32]
+            tv.tv_usec = (long)(timeout*1000000.0);
+                       ~ ^~~~~~~~~~~~~~~~~~~~~~~~~
+    src/pycurl.c:4513:27: warning: implicit conversion loses integer precision: 'unsigned long' to 'int' [-Wshorten-64-to-32]
+        libcurl_version_len = strlen(libcurl_version);
+                            ~ ^~~~~~~~~~~~~~~~~~~~~~~
+    6 warnings generated.
+    src/pycurl.c:123:4: warning: "libcurl was compiled with SSL support, but configure could not determine which "    "library was used; thus no SSL crypto locking callbacks will be set, which may "    "cause random crashes on SSL requests" [-W#warnings]
+    #  warning \
+       ^
+    1 warning generated.
+    cc -bundle -undefined dynamic_lookup -arch x86_64 -arch i386 -Wl,-F. build/temp.macosx-10.9-intel-2.7/src/pycurl.o -lcurl -o build/lib.macosx-10.9-intel-2.7/pycurl.so
+    
+Successfully installed pycurl
+Cleaning up...
+rtp-wrlong-89110:invicta-python-tool wrlong$ python
+Python 2.7.5 (default, Mar  9 2014, 22:15:05) 
+[GCC 4.2.1 Compatible Apple LLVM 5.0 (clang-500.0.68)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pycurl
+>>> api_url = https://172.26.10.100/restapi/15/authenticate
+  File "<stdin>", line 1
+    api_url = https://172.26.10.100/restapi/15/authenticate
+                   ^
+SyntaxError: invalid syntax
+>>> api_url = "https://172.26.10.100/restapi/15/authenticate"
+>>> api_url
+'https://172.26.10.100/restapi/15/authenticate'
+>>> import pycurl
+>>> data = json.dumps({"username":"apiuser","password":"c1sco123"})
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'json' is not defined
+>>> data = json.dumps({"username":"apiuser","password":"c1sco123"})
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'json' is not defined
+>>> import json
+>>> data = json.dumps({"username":"apiuser","password":"c1sco123"})
+>>> c.pycurl.Curl()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'c' is not defined
+>>> c = pycurl.Curl()
+>>> c.setopt(pycurl.URL, api_url)
+>>> c.setopt(pycurl.HTTPHEADER, ['Accept: application/json'])
+>>> c.setopt(pycurl.POST, 1)
+>>> c.setopt(pycurl.POSTFIELDS, data)
+>>> c.perform()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+pycurl.error: (60, 'SSL certificate problem: Invalid certificate chain')
+>>> c.setopt(pycurl.SSL_VERIFYPEER, 0)
+>>> c.setopt(pycurl.SSL_VERIFYHOST, 0)
+>>> c.perform()
+{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}>>> 
+>>> 
+>>> c.setopt(pycurl.HTTPHEADER, ['Content-Type: application/json', 'Accept: application/json'])
+>>> c.perform()                                                                 {"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}>>> data
+'{"username": "apiuser", "password": "c1sco123"}'
+>>> data = json.dumps([{"username":"apiuser","password":"c1sco123"}])>>> c.setopt(pycurl.POSTFIELDS, data)>>> c.perform()
+{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}>>> data
+'[{"username": "apiuser", "password": "c1sco123"}]'
+>>> data = ''
+>>> c.setopt(pycurl.POSTFIELDS, data)
+>>> c.perform()
+{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}>>> 
+>>> 
+>>> c.perform() | python -m json.tool
+  File "<stdin>", line 1
+    c.perform() | python -m json.tool
+                               ^
+SyntaxError: invalid syntax
+>>> c.perform() | json.tool
+{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'tool'
+>>> data = json.dumps({"data":{"username":"apiuser","password":"c1sco123"}})
+>>> c.setopt(pycurl.POSTFIELDS, data)
+>>> c.perform() 
+{"status":100,"message":"Invalid data format.","data":null,"envelope_version":"15"}>>> 
+>>> 
+>>> data
+'{"data": {"username": "apiuser", "password": "c1sco123"}}'
+>>> data
+'{"data": {"username": "apiuser", "password": "c1sco123"}}'
+>>> data = 'data={"username":"apiuser","password":"c1sco123"}})'
+>>> c.setopt(pycurl.POSTFIELDS, data)
+>>> c.perform()
+>>> c.response()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: response
+>>> c.text
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: text
+>>> c.setopt(c.WRITEFUNCTION, storage.write)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'storage' is not defined
+>>> import requests
+>>> headers = '{"Content-Type":"application/json","Accept":"application/json"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 422, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 360, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 295, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 394, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> import json
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 422, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 360, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 295, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 394, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> headers
+'{"Content-Type":"application/json","Accept":"application/json"}'
+>>> data
+'data={"username":"apiuser","password":"c1sco123"}})'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 422, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 360, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 295, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 394, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> import pycurlKeyboardInterrupt
+>>> 
+>>> 
+>>> api_url
+'https://172.26.10.100/restapi/15/authenticate'
+>>> data
+'data={"username":"apiuser","password":"c1sco123"}})'
+>>> headers
+'{"Content-Type":"application/json","Accept":"application/json"}'
+>>> headers = '{"Accept":"application/json"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 88, in post
+    return request('post', url, data=data, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 422, in request
+    prep = self.prepare_request(req)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 360, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 295, in prepare
+    self.prepare_headers(headers)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/models.py", line 394, in prepare_headers
+    self.headers = CaseInsensitiveDict((to_native_string(name), value) for name, value in headers.items())
+AttributeError: 'str' object has no attribute 'items'
+>>> headers = {"Accept":"application/json"}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.content
+''
+>>> r.text
+u''
+>>> r
+<Response [500]>
+>>> r.status_code
+500
+>>> r.text
+u''
+>>> headers = {"Content-Type":"application/json","Accept":"application/json"}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.text
+u''
+>>> r
+<Response [500]>
+>>> r.content
+''
+>>> headers = {"Content-Type":"application/json","Accept":"application/json"}
+KeyboardInterrupt
+>>> api_url
+'https://172.26.10.100/restapi/15/authenticate'
+>>> r.headers
+{'content-length': '0', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 12:31:39 GMT', 'content-type': 'text/html; charset=UTF-8'}
+>>> r.request.headers
+{'Content-Length': '51', 'Content-Type': 'application/json', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'User-Agent': 'python-requests/2.3.0 CPython/2.7.5 Darwin/13.2.0'}
+>>> headers = {"Accept":"application/json"}
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.request.headers
+{'Content-Length': '51', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'User-Agent': 'python-requests/2.3.0 CPython/2.7.5 Darwin/13.2.0'}
+>>> r.text
+u''
+>>> r.json
+<bound method Response.json of <Response [500]>>
+>>> r.content
+''
+>>> r
+<Response [500]>
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r
+<Response [500]>
+>>> data
+'data={"username":"apiuser","password":"c1sco123"}})'
+>>> data = 'data={"username":"apiuser","password":"c1sco123"})'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r
+<Response [500]>
+>>> r.headers
+{'content-length': '0', 'x-powered-by': 'PHP/5.4.14', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'date': 'Fri, 27 Jun 2014 12:36:15 GMT', 'content-type': 'text/html; charset=UTF-8'}
+>>> r.request.headers
+{'Content-Length': '50', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json', 'User-Agent': 'python-requests/2.3.0 CPython/2.7.5 Darwin/13.2.0'}
+>>> data = 'data={"username":"apiuser","password":"c1sco123"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.headers
+{'content-length': '199', 'x-powered-by': 'PHP/5.4.14', 'set-cookie': 'PHPSESSID=c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0; path=/', 'expires': 'Thu, 19 Nov 1981 08:52:00 GMT', 'server': 'Apache/2.2.15 (CentOS)', 'connection': 'close', 'pragma': 'no-cache', 'cache-control': 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0', 'date': 'Fri, 27 Jun 2014 12:37:33 GMT', 'content-type': 'text/html; charset=UTF-8'}
+>>> r.headers['set-cookie']
+'PHPSESSID=c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0; path=/'
+>>> token_tmp = r.headers['set-cookie'] 
+>>> token = token_tmp.replace("PHPSESSID=", "")
+>>> token
+'c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0; path=/'
+>>> token = token_tmp.replace("; path=/", "")
+>>> token
+'PHPSESSID=c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0'
+>>> 
+>>> token = token_tmp.replace("PHPSESSID=", "")
+>>> token
+'c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0; path=/'
+>>> token = token.replace("; path=/", "")
+>>> token
+'c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0'
+>>> api_url2 = api_url.replace("authenticate", "")
+>>> api_url2
+'https://172.26.10.100/restapi/15/'
+>>> api_url2 + token
+'https://172.26.10.100/restapi/15/c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0'
+>>> api_url2 + token + "initiatorgroup"
+'https://172.26.10.100/restapi/15/c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0initiatorgroup'
+>>> api_url2 + token + "/initiatorgroup"
+'https://172.26.10.100/restapi/15/c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0/initiatorgroup'
+>>> api_url_ig = api_url2 + token + "/initiatorgroup"
+>>> api_url_ig
+'https://172.26.10.100/restapi/15/c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0/initiatorgroup'
+>>> data_ig = 
+KeyboardInterrupt
+>>> data
+'data={"username":"apiuser","password":"c1sco123"}'
+>>> data_ig = 'data={"name":"test_ig"}'
+>>> r = requests.post(api_url_ig, data_ig, verify=False, headers=headers)
+>>> r.text
+u'{"status":1,"message":"OK","data":{},"envelope_version":"15"}'
+>>> r = requests.delete(api_url_ig, data_ig, verify=False, headers=headers)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: delete() takes exactly 1 argument (4 given)
+>>> api_url_ig
+'https://172.26.10.100/restapi/15/c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0/initiatorgroup'
+>>> api_url_ig_delete = api_url_ig + "/test_ig"
+>>> r = requests.delete(api_url_ig_delete)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 120, in delete
+    return request('delete', url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/api.py", line 44, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 456, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/sessions.py", line 559, in send
+    r = adapter.send(request, **kwargs)
+  File "/Library/Python/2.7/site-packages/requests-2.3.0-py2.7.egg/requests/adapters.py", line 382, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: [Errno 1] _ssl.c:504: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
+>>> r = requests.delete(api_url_ig_delete, verify=False)
+>>> r.status
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'status'
+>>> r.tet
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'tet'
+>>> r.text
+u'{"status":501,"message":"Incorrectly specified content type. Following content type(s) are supported: \\"application\\/json\\", \\"application\\/octet-stream\\"","data":null,"envelope_version":"15"}'
+>>> r = requests.delete(api_url_ig_delete, verify=False, headers=headers)
+>>> r.text
+u'{"status":403,"message":"Authentication failed - submitted token is invalid.","data":null,"envelope_version":"15"}'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)
+>>> r.text
+u'{"status":1,"message":"OK","data":{"token":"c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442ed036a2debbf27ed3"},"envelope_version":"15"}'
+>>> api_url_ig_delete = api_url_ig + "/test_ig"
+KeyboardInterrupt
+>>> apit_url_ig
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'apit_url_ig' is not defined
+>>> api_url_ig
+'https://172.26.10.100/restapi/15/c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442e80ffd7dfbb0414d0/initiatorgroup'
+>>> api_url_ig_delete = "https://172.26.10.100/restapi/15/" + "c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442ed036a2debbf27ed3" + "/initiatorgroup/test_ig"
+>>> api_url_ig_delete
+'https://172.26.10.100/restapi/15/c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442ed036a2debbf27ed3/initiatorgroup/test_ig'
+>>> r = requests.post(api_url, data, verify=False, headers=headers)>>> r.textu'{"status":1,"message":"OK","data":{"token":"c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442ed036a2debbf27ed3"},"envelope_version":"15"}'
+>>> api_url_ig_delete = "https://172.26.10.100/restapi/15/" + "c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442ed036a2debbf27ed3" + "/initiatorgroup/test_ig"
+>>> r = requests.delete(api_url_ig_delete, verify=False, headers=headers)>>> r.text                                                                      u'{"status":1,"message":"OK","data":{},"envelope_version":"15"}'>>> data
+'data={"username":"apiuser","password":"c1sco123"}'
+>>> headers
+{'Accept': 'application/json'}
+>>> r.data
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'data'
+>>> r.token
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'token'
+>>> r
+<Response [200]>
+>>> r.text
+u'{"status":1,"message":"OK","data":{},"envelope_version":"15"}'
+>>> r.data
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Response' object has no attribute 'data'
+>>> api_url_ig_delete = "https://172.26.10.100/restapi/15/" + "c1b56a2b804450de2c1c68b4533e4e349305cd6d0c835552b4f2c258f449163d27474f4fa14731db670c87e4022eb158145b786dcadf442ed036a2debbf27ed3" + "/initiatorgroup/test_ig"
+>>> 
