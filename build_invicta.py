@@ -1,84 +1,82 @@
 #!/usr/bin/python
 
 import json
-import time
-import datetime
-import sys
 import getopt
-import getpass
+import sys
 from modules.utilities import authentication
+from modules.utilities import utilities
 from modules.lun import lun
 from modules.initiator import initiator
 
-ts = time.time()
-timestamp_str = \
-    datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
-#remove_script_file = "remove_script_" + timestamp_str
-#file_out = open(remove_script_file, 'w')
+if __name__ == '__main__':
 
-invoking_user = getpass.getuser()
-desc_string = "Created via Python by " + invoking_user + " - " + timestamp_str
-print desc_string
+    time_start = utilities.current_time()
+    desc_string = utilities.unique_description()
 
-config_file = "invicta_config-2xESXjson"
 
-myopts, args = getopt.getopt(sys.argv[1:], "c:i:u:p:", ["config_file=","ip=","user=","pw="])
-
-for o, a in myopts:
-    if o in ("-i", "--ip"):
-        invicta_ip = a
-    elif o in ("-u", "--user"):
-        invicta_user = a
-    elif o in ("-p", "--pw"):
-        invicta_pw = a
-    elif o in ("-c", "--config_file"):
-        config_file = a
-    else:
+    try:
+        myopts, args = getopt.getopt(sys.argv[1:], "c:i:u:p:", ["config_file=","ip=","user=","pw="])
+    except getopt.GetoptError:
         print("Usage: %s --ip <ip> --user <user_name> --pw <password> --config_file <config_file>" % sys.argv[0])
 
-json_config_data = open(config_file)
-InvictaTemplates = json.load(json_config_data)
+    for o, a in myopts:
+        if o in ("-i", "--ip"):
+            invicta_ip = a
+        elif o in ("-u", "--user"):
+            invicta_user = a
+        elif o in ("-p", "--pw"):
+            invicta_pw = a
+        elif o in ("-c", "--config_file"):
+            config_file = a
+        else:
+            print("Usage: %s --ip <ip> --user <user_name> --pw <password> --config_file <config_file>" % sys.argv[0])
 
-for inv_temp in InvictaTemplates.keys():
-    init_groups = InvictaTemplates[inv_temp]['initiator_groups']
-    luns = InvictaTemplates[inv_temp]['luns']
+    try:
+        json_config_data = open(config_file)
+        InvictaTemplates = json.load(json_config_data)
+    except JsonLoadException:
+        print("Error: Error loading JSON file for import.")
 
-    for init_group in init_groups.keys():
-        token = authentication.login(invicta_ip, invicta_user, invicta_pw)
+    for inv_temp in InvictaTemplates.keys():
+        init_groups = InvictaTemplates[inv_temp]['initiator_groups']
+        luns = InvictaTemplates[inv_temp]['luns']
 
-        initiator.create_initiator_group(
-            invicta_ip,
-            token,
-            init_group)
+        for init_group in init_groups.keys():
+            token = authentication.login(invicta_ip, invicta_user, invicta_pw)
 
-        for wwpn in init_groups[init_group].values():
-            initiator.create_initiator(
+            initiator.create_initiator_group(
                 invicta_ip,
                 token,
-                init_group,
-                wwpn)
+                init_group)
 
-    for lun_to_create in luns.keys():
-        token = authentication.login(invicta_ip, invicta_user, invicta_pw)
-        lun_vg = luns[lun_to_create]['volume_group']
-        lun_size = int(luns[lun_to_create]['size'])
-        lun_init_groups = luns[lun_to_create]['initiator_groups']
+            for wwpn in init_groups[init_group].values():
+                initiator.create_initiator(
+                    invicta_ip,
+                    token,
+                    init_group,
+                    wwpn)
 
-        lun.create_lun(
-            invicta_ip,
-            token,
-            lun_to_create,
-            lun_vg,
-            lun_size,
-            "testvg01",
-            "true")
+        for lun_to_create in luns.keys():
+            token = authentication.login(invicta_ip, invicta_user, invicta_pw)
+            lun_vg = luns[lun_to_create]['volume_group']
+            lun_size = int(luns[lun_to_create]['size'])
+            lun_init_groups = luns[lun_to_create]['initiator_groups']
 
-        for lun_init_group in lun_init_groups.keys():
-            lun_id = lun_init_groups[lun_init_group]
-
-            lun.map_lun(
+            lun.create_lun(
                 invicta_ip,
                 token,
-                lun_init_group,
                 lun_to_create,
-                lun_id)
+                lun_vg,
+                lun_size,
+                "testvg01",
+                "true")
+
+            for lun_init_group in lun_init_groups.keys():
+                lun_id = lun_init_groups[lun_init_group]
+
+                lun.map_lun(
+                    invicta_ip,
+                    token,
+                    lun_init_group,
+                    lun_to_create,
+                    lun_id)
