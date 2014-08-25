@@ -22,4 +22,3 @@ def invoking_user():
 def unique_description():
     return "Created via Python by " + invoking_user() + \
            " - " + timestamp_str()
-
